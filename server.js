@@ -1,4 +1,4 @@
-const express = strict = require('express');
+const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 7000;
 
@@ -8,11 +8,9 @@ app.get('/', (req, res) => {
   res.json({ status: 'online', service: 'lampa-lite-backend' });
 });
 
-// Простой универсальный прокси для поиска видео без жестких токенов
 app.get('/search', async (req, res) => {
   try {
     const query = req.query.q || '';
-    // Обращаемся к открытому каталогу
     const response = await fetch(`https://bazon.cc/api/search?token=free&title=${encodeURIComponent(query)}`, {
       headers: { 'User-Agent': 'Mozilla/5.0' }
     });
@@ -26,3 +24,4 @@ app.get('/search', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
